@@ -1,0 +1,68 @@
+1. DNS Request
+DNS (Domain Name System): The first thing your browser does when you type a URL like "https://www.google.com" is resolve the domain name to an IP address. The browser doesn’t understand human-readable domain names, only IP addresses.
+
+DNS Lookup: The browser contacts a DNS resolver (usually provided by your ISP or a public DNS service like Google DNS or Cloudflare) to convert “www.google.com” into an IP address (e.g., 142.250.72.68).
+
+Caching: To improve speed, the operating system or browser might already have a cached DNS entry for "google.com," so it won’t need to perform a lookup every time.
+
+2. TCP/IP Connection
+TCP/IP Protocol: Once the DNS lookup is complete and your browser knows the IP address of the server, it initiates a connection to the server. This uses the Transmission Control Protocol (TCP), which ensures reliable data transmission.
+
+Three-Way Handshake: The browser starts a TCP connection using a 3-way handshake:
+
+SYN: The browser sends a request to the server to start communication.
+
+SYN-ACK: The server acknowledges the request.
+
+ACK: The browser confirms the connection is established.
+
+IP Routing: The data travels through multiple routers on the internet to reach the Google server.
+
+3. Firewall
+Firewall Security Check: As the connection travels across the internet, it may pass through firewalls (either on your device, the server’s network, or intermediary networks). Firewalls filter incoming and outgoing traffic based on predefined security rules to block malicious traffic.
+
+Packet Filtering: Firewalls inspect each packet of data to determine if it’s legitimate based on the port, protocol, or other rules. For example, HTTPS traffic typically uses port 443, which firewalls allow by default.
+
+4. HTTPS/SSL Handshake
+HTTPS Request: The "https://" part of the URL signals that the connection should be secured using SSL/TLS (Secure Socket Layer / Transport Layer Security). This ensures that the data exchanged between your browser and the server is encrypted.
+
+SSL Handshake:
+
+The browser sends a request to the server to establish a secure connection.
+
+The server responds with its SSL certificate, which contains the server’s public key.
+
+The browser verifies the certificate’s validity (e.g., checking that it’s issued by a trusted Certificate Authority and not expired).
+
+Both parties exchange keys and agree on an encryption method.
+
+After the handshake, communication continues with encrypted data, making it secure from eavesdropping.
+
+5. Load Balancer
+Load Balancer Role: Google likely uses a load balancer in front of its web servers. When your request reaches the server farm, the load balancer decides which specific server should handle the request.
+
+Round-Robin or Algorithm-Based: Load balancers may use algorithms like round-robin, least connections, or IP hash to distribute requests evenly across servers, ensuring optimal performance and preventing any single server from being overwhelmed.
+
+6. Web Server
+Web Server: The load balancer directs the request to a web server, such as Nginx or Apache. The web server’s job is to handle HTTP(S) requests and return the requested resources (like HTML, CSS, JavaScript, and images).
+
+Routing the Request: The web server routes the request based on the requested URL path and headers. If it's a static page or resource (like an image), the web server may serve it directly.
+
+7. Application Server
+Dynamic Content Request: If the request is for dynamic content (like querying Google’s search engine or fetching Gmail data), the web server hands the request off to an application server (e.g., Java, Node.js, Python, etc.).
+
+Application Logic: The application server processes the business logic and performs any necessary operations, such as fetching data from a database, calling external APIs, or generating the appropriate HTML content.
+
+Response: The application server returns the processed data back to the web server.
+
+8. Database
+Database Interaction: If the request requires retrieving or modifying data (like performing a Google search), the application server queries a database.
+
+Database Types: Depending on the data structure, Google may use relational databases (like MySQL or PostgreSQL) or NoSQL databases (like Bigtable or Spanner).
+
+Query and Response: The application server sends a query to the database. The database retrieves the relevant data, processes the query, and sends the result back to the application server, which can then send it to the client (your browser).
+
+9. Response to the Browser
+Data Return: The web server sends back the final HTML, CSS, and JavaScript to your browser. In the case of Google, this could be a search results page, which your browser then renders.
+
+Rendering: Your browser interprets the HTML, applies CSS for styling, executes JavaScript, and loads any images or other assets (like fonts and videos).
